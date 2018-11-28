@@ -27,6 +27,22 @@ namespace SES_WebServices
                 return Json(cadena, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult PedidosNombreProveedor(int PedidosId)
+        {
+            String cadena = "";
+            WEB_Pedidos q = new WEB_Pedidos();
+            q.PedidosId = PedidosId;
+            q.MtdSelectPedidoNombreProveedor();
+            if (q.Exito)
+            {
+                GetJson(q.Datos);
+                return Json(rows, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(cadena, JsonRequestBehavior.AllowGet);
+            }
+        }
         [System.Web.Mvc.HttpGet]
         public ActionResult Pedidos()
         {
