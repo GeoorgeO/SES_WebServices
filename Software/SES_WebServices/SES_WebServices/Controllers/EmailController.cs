@@ -40,6 +40,22 @@ namespace SES_WebServices.Controllers
                 return Json(cadena, JsonRequestBehavior.AllowGet);
             }
         }
+        [System.Web.Mvc.HttpGet]
+        public ActionResult DestinoEmail()
+        {
+            string cadena = string.Empty;
+            CLS_Correos ParmGen = new CLS_Correos();
+            ParmGen.MtdSeleccionarCorreosDestino();
+            if (ParmGen.Exito)
+            {
+                GetJson(ParmGen.Datos);
+                return Json(rows, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(cadena, JsonRequestBehavior.AllowGet);
+            }
+        }
         public void GetJson(DataTable dt)
         {
             Dictionary<string, object> row;
