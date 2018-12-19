@@ -135,11 +135,12 @@ namespace SES_WebServices
             }
         }
         [System.Web.Mvc.HttpGet]
-        public ActionResult PedidosSurtido(int PedidosId)
+        public ActionResult PedidosSurtido(int PedidosId,int PedidosSurtido)
         {
             String cadena = "";
             WEB_Pedidos q = new WEB_Pedidos();
             q.PedidosId = PedidosId;
+            q.PedidosSurtido = PedidosSurtido;
             q.MtdUpdatePedidoSurtido();
             if (q.Exito)
             {
