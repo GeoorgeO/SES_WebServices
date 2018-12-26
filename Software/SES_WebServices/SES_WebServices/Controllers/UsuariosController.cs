@@ -16,11 +16,14 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.ServiceModel;
 
 
 
 namespace SES_WebServices
 {
+    [System.ServiceModel.ServiceBehavior(
+        IncludeExceptionDetailInFaults = true)]
     public class UsuariosController : Controller
     {
         string key = "BSC-Reportes";

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using CapaDeDatos;
 using System.Web.Mvc;
 using System.Data;
+using System.ServiceModel;
 
 namespace SES_WebServices
 {
+    [System.ServiceModel.ServiceBehavior(
+        IncludeExceptionDetailInFaults = true)]
     public class PedidosController : Controller
     {
         public List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
@@ -152,6 +155,24 @@ namespace SES_WebServices
                 return Json(cadena, JsonRequestBehavior.AllowGet);
             }
         }
+        [System.Web.Mvc.HttpGet]
+        public ActionResult PedidosDeleteInsidencias(int PedidosId, string ArticuloCodigo)
+        {
+            String cadena = "";
+            CLS_Pedidos q = new CLS_Pedidos();
+            q.PedidosId = PedidosId;
+            q.ArticuloCodigo = ArticuloCodigo;
+            q.MtdEliminarInsidencia();
+            if (q.Exito)
+            {
+                GetJson(q.Datos);
+                return Json(rows, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(cadena, JsonRequestBehavior.AllowGet);
+            }
+        }
         public void GetJson(DataTable dt)
         {
             Dictionary<string, object> row;
@@ -168,5 +189,6 @@ namespace SES_WebServices
                 rows.Add(row);
             }
         }
+
     }
 }
